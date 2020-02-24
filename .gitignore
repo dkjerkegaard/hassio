@@ -19,6 +19,8 @@ tts
 .HA_VERSION
 *.log
 *.db
+*.db-shm
+*.db-wal
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
