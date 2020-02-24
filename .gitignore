@@ -21,6 +21,7 @@ tts
 *.db
 *.db-shm
 *.db-wal
+plex.conf
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
