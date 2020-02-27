@@ -1,0 +1,49 @@
+
+- cal_id: family01481066053394425859@group.calendar.google.com
+  entities:
+  - device_id: familie
+    ignore_availability: true
+    name: Familie
+    track: true
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: true
+
+- cal_id: u1lfjca4oe48gq3uqak0vs2mqo@group.calendar.google.com
+  entities:
+  - device_id: alle
+    ignore_availability: true
+    name: Alle
+    track: true
+
+- cal_id: da.danish#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: helligdage_i_danmark
+    ignore_availability: true
+    name: Helligdage i Danmark
+    track: true
+
+- cal_id: 2ttkcsr84pmi69qmt2rm6vl5ok@group.calendar.google.com
+  entities:
+  - device_id: mille_mus
+    ignore_availability: true
+    name: "Mille mus \u2764\uFE0F"
+    track: true
+
+- cal_id: kqmfp5nj34b2cpantlu5uqikos@group.calendar.google.com
+  entities:
+  - device_id: daniel_og_kristine
+    ignore_availability: true
+    name: Daniel og Kristine
+    track: true
+
+- cal_id: kjerkegaard96@gmail.com
+  entities:
+  - device_id: min_kalender
+    ignore_availability: true
+    name: Min kalender
+    track: true

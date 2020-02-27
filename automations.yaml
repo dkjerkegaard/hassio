@@ -2,37 +2,28 @@
   alias: Tænd LED båndet om natten
   description: ''
   trigger:
-  - device_id: 82e4ee243fff4fe5aae77fcb46495396
-    domain: binary_sensor
-    entity_id: binary_sensor.repo_sensor_motion
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 1
-    platform: device
-    type: motion
+  - entity_id: binary_sensor.repo_sensor_motion
+    platform: state
+    to: 'on'
   condition:
-  - after: '22:00'
-    before: '07:00'
+  - after: '21:00'
+    before: 07:00
     condition: time
   action:
   - data:
       group_name: Køkken
-      scene_name: Dæmpet
+      scene_name: Midt
     service: hue.hue_activate_scene
-  - delay: 00:10:00
-  - entity_id: light.led_bandet
-    service: light.turn_off
 - id: '1582412646897'
   alias: Goodmorning
   description: ''
   trigger:
-  - at: 08:30
+  - at: 06:45
     platform: time
   condition: []
   action:
   - data:
-      volume_level: 0.05
+      volume_level: 0.1
     entity_id: media_player.sovevaerelset
     service: media_player.volume_set
   - data:
@@ -41,22 +32,17 @@
     service: spotcast.start
   - scene: scene.wakeup
   - data:
-      volume_level: 0.1
+      volume_level: 0.2
     entity_id: media_player.sovevaerelset
     service: media_player.volume_set
   - delay: 00:00:20
   - data:
-      volume_level: 0.15
-    entity_id: media_player.sovevaerelset
-    service: media_player.volume_set
-  - delay: 00:00:12
-  - data:
-      volume_level: 0.2
-    entity_id: media_player.sovevaerelset
-    service: media_player.volume_set
-  - delay: 00:00:12
-  - data:
       volume_level: 0.3
+    entity_id: media_player.sovevaerelset
+    service: media_player.volume_set
+  - delay: 00:00:12
+  - data:
+      volume_level: 0.35
     entity_id: media_player.sovevaerelset
     service: media_player.volume_set
   - delay: 00:00:12
@@ -64,3 +50,95 @@
       volume_level: 0.4
     entity_id: media_player.sovevaerelset
     service: media_player.volume_set
+  - delay: 00:00:12
+  - data:
+      volume_level: 0.45
+    entity_id: media_player.sovevaerelset
+    service: media_player.volume_set
+- id: '1582412646892'
+  alias: Create a notification when there is updates pending in HACS
+  trigger:
+  - entity_id: sensor.hacs
+    platform: state
+  condition:
+  - condition: template
+    value_template: '{{ states(trigger.entity_id) != ''unknown''}}'
+  - condition: template
+    value_template: '{{ (states(trigger.entity_id) | float) != 0}}'
+  action:
+  - data_template:
+      message: "{% for repo in state_attr(trigger.entity_id, 'repositories') %}\n\
+        \  **{{ repo.display_name }}** _{{ repo[\"installed version\"] }}_ -> _{{\
+        \ repo[\"available version\"] }}_\n{% endfor %}"
+      title: Updates pending in HACS
+    service: persistent_notification.create
+- id: '1582632979805'
+  alias: Dark Mode at night
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  - entity_id: sun.sun
+    platform: state
+    to: above_horizon
+  - entity_id: sun.sun
+    platform: state
+    to: below_horizon
+  condition: []
+  action:
+  - data_template:
+      name: "{% if states.sun.sun.state == \"above_horizon\" %}\n  Google Light Theme\n\
+        {% else %}\n  Google Dark Theme\n{% endif %}\n"
+    service: frontend.set_theme
+- id: '1582662253074'
+  alias: Sluk LED båndet igen
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.repo_sensor_motion
+    for: 00:10
+    platform: state
+    to: 'off'
+  condition:
+  - after: '21:00'
+    before: 07:00
+    condition: time
+  action:
+  - entity_id: light.led_bandet
+    service: light.turn_off
+- id: '1582731054593'
+  alias: Notify Daniel at Bootup
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      message: '"... så er din Home Assistant oppe igen!"
+
+        '
+      title: Woohoo!...
+    service: notify.mobile_app_d_s_galaxys8
+- id: '1582746059337'
+  alias: Beomaster 900 følger Beomasteren
+  description: Når der streames til beomasteren tændes radioen og slukker når det
+    stoppes igen.
+  trigger:
+  - entity_id: media_player.beomasteren
+    platform: state
+    to: playing
+  - entity_id: media_player.beomasteren
+    for: 00:01:00
+    platform: state
+    to: paused
+  - entity_id: media_player.beomasteren
+    for: 00:01:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - entity_id: light.beomaster900
+    service_template: '{% if states(''media_player.beomasteren'') == "playing" %}
+      light.turn_on {% else %} light.turn_off {% endif %}
+
+      '
