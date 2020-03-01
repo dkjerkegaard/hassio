@@ -20,11 +20,11 @@ spotcast:
 
 weather:
   - platform: darksky
-    api_key: 64257a4c294f4d1d1badc9aa8774907d
+    api_key: !secret DARKSKY
     mode: daily
   
 google:
-    client_id: 1050492650033-k01pg992n93fpsnupge2psgeenf7d9h5.apps.googleusercontent.com
+    client_id: !secret google_client
     client_secret: !secret google_secret
 
 # Text to speech
