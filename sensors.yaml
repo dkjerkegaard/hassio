@@ -2,20 +2,6 @@
   - platform: yr
     name: Vejr
     forecast: 24
-    monitored_conditions:
-      - temperature
-      - symbol
-      - precipitation
-      - windSpeed
-      - pressure
-      - windDirection
-      - humidity
-      - fog
-      - cloudiness
-      - lowClouds
-      - mediumClouds
-      - highClouds
-      - dewpointTemperature
     
 #Rejseplanen Tog information
   - platform: rejseplanen

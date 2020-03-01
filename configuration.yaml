@@ -1,5 +1,7 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
+homeassistant:
+    customize: !include customize.yaml
 
 frontend:
     themes: !include_dir_merge_named /config/themes

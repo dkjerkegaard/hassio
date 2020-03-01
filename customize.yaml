@@ -1,2 +1,4 @@
 sensor.tog_hedensted_horsens:
   friendly_name: Hedensted - Horsens
+media_player.tv_i_sovevaerelset:
+  friendly_name: TV'et i soveværelset

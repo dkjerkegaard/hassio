@@ -114,7 +114,7 @@
   condition: []
   action:
   - data:
-      message: '"... så er din Home Assistant oppe igen!"
+      message: 'så er din Home Assistant oppe igen!
 
         '
       title: Woohoo!...
