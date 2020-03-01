@@ -1,8 +1,8 @@
 #Switch:
   - platform: wake_on_lan
-    mac: !secret D-PC-MAC
+    mac: !secret D_PC_MAC
     name: "Min Computer"
-    host: !secret D-PC-HOST
+    host: !secret D_PC_HOST
     turn_off:
       service: hassio.addon_stdin
       data:

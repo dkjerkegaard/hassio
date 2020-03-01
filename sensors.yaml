@@ -23,28 +23,28 @@
   #Travel Time to Work
   - platform: waze_travel_time
     name: "Arbejde"
-    origin: 55.8704854,9.8349133
-    destination: 55.7677494,9.696799
+    origin: !secret HOME_LOCATION
+    destination: !secret WORK_LOCATION
     region: 'EU'
   
   #Travel Time to Stouby
   - platform: waze_travel_time
     name: "Stouby"
-    origin: 55.8704854,9.8349133
-    destination: 55.7020197,9.7947213
+    origin: !secret HOME_LOCATION
+    destination: !secret STOUBY
     region: 'EU'
 
   #Travel Time to Mogelkaer
   - platform: waze_travel_time
     name: "Møgelkær"
-    origin: 55.8704854,9.8349133
-    destination: 55.7947528,9.912138
+    origin: !secret HOME_LOCATION
+    destination: !secret MOGELKAER
     region: 'EU'
 
   #Travel Time to School
   - platform: waze_travel_time
     name: "Skole"
-    origin: 55.8704854,9.8349133
+    origin: !secret HOME_LOCATION
     destination: 55.7091468,9.5237278
     region: 'EU'
     
@@ -52,5 +52,5 @@
   - platform: waze_travel_time
     name: "Daniel til Hjem"
     origin: device_tracker.sm_g955f
-    destination: 55.8704854,9.8349133
+    destination: !secret HOME_LOCATION
     region: 'EU'
